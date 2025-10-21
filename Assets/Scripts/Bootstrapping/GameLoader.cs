@@ -25,7 +25,7 @@ public class GameLoader : MonoBehaviour {
             scenesToLoadInOrder.Add(sceneName);
         }
 
-        foreach(var scene in scenesToLoadInOrder) {
+        foreach(string scene in scenesToLoadInOrder) {
             yield return StartCoroutine(LoadSceneAdditiveIfNotLoaded(scene));
         }
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ToolBox.Serialization;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,10 +39,10 @@ public class PlayerMovement {
         inputHandler.RegisterPlayerInput();
 
         LoadPlayerSavedData();
-        // characterController.transform.position = new Vector3(
-        //     currentSavedData.currentPlayerData.position[0],
-        //     currentSavedData.currentPlayerData.position[1],
-        //     currentSavedData.currentPlayerData.position[2]);
+        characterController.transform.position = new Vector3(
+            currentSavedData.currentPlayerData.position[0],
+            currentSavedData.currentPlayerData.position[1],
+            currentSavedData.currentPlayerData.position[2]);
 
         playerReference.transform.position = spawnPoint.transform.position;
         playerReference.transform.rotation = spawnPoint.transform.rotation;
@@ -83,14 +84,14 @@ public class PlayerMovement {
             timeAndDate = "2024-11-26"
         };
 
-        // using Save System for Unity package with Odin Serializer
-        // DataSerializer.Save("player_data", currentSavedData.currentPlayerData);
-        // DataSerializer.Save("level_data", currentSavedData.levelData);
+        //using Save System for Unity package with Odin Serializer
+        DataSerializer.Save("player_data", currentSavedData.currentPlayerData);
+        DataSerializer.Save("level_data", currentSavedData.levelData);
     }
 
     private void LoadCurrentData() {
-        // EntitySettings entitySettings = DataSerializer.Load<EntitySettings>("player_data");
-        // LevelData levelData = DataSerializer.Load<LevelData>("level_data");
+        EntitySettings entitySettings = DataSerializer.Load<EntitySettings>("player_data");
+        LevelData levelData = DataSerializer.Load<LevelData>("level_data");
 
         CurrentPlayerData currentPlayerData = currentSavedData.currentPlayerData;
         playerSettings.entityName = currentPlayerData.entitySettings.name;
